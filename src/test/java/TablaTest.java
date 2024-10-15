@@ -1,5 +1,9 @@
 import com.connect4.Tabla;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TablaTest {
@@ -8,8 +12,8 @@ public class TablaTest {
     public void testLehelyez() {
         Tabla tabla = new Tabla(6, 7);
         assertTrue(tabla.lehelyez(0, 'X'));
-        assertFalse(tabla.lehelyez(-1, 'X')); // Érvénytelen oszlop
-        assertFalse(tabla.lehelyez(7, 'X')); // Érvénytelen oszlop
+        Assertions.assertFalse(tabla.lehelyez(-1, 'X')); // Érvénytelen oszlop
+        Assertions.assertFalse(tabla.lehelyez(7, 'X')); // Érvénytelen oszlop
     }
 
     @Test
