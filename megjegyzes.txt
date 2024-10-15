@@ -1,0 +1,7 @@
+- Ha elfogyott a táblán a hely akkor vége a játéknak
+- Tesztelni h kiírja-e az eredményt egy fájlba
+- jelenítse meg melyik játékos hány meccset nyert
+- GitHubbal kapcsolódni + feltölteni a végleges kódot
+- színek
+
+- befejezni a highscoremanager leirását a kódban
