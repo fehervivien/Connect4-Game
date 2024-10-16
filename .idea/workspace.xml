@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1792c53c-f170-453f-9e87-15ff0e2a33cd" name="Changes" comment="javított">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/connect4/PalyaOlvasasa.java" afterDir="false" />
+    <list default="true" id="1792c53c-f170-453f-9e87-15ff0e2a33cd" name="Changes" comment="+saved game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect4/HighScoreManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/connect4/HighScoreManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/connect4/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/connect4/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect4/PalyaOlvasasa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/connect4/PalyaOlvasasa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,7 @@
       <workItem from="1728761025107" duration="7000" />
       <workItem from="1728762498264" duration="111000" />
       <workItem from="1729005722179" duration="1410000" />
-      <workItem from="1729087390513" duration="4358000" />
+      <workItem from="1729087390513" duration="4865000" />
     </task>
     <task id="LOCAL-00001" summary="első feltöltés">
       <option name="closed" value="true" />
@@ -97,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729009095477</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="+saved game">
+      <option name="closed" value="true" />
+      <created>1729091814480</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729091814480</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,6 +113,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="első feltöltés" />
     <MESSAGE value="javított" />
-    <option name="LAST_COMMIT_MESSAGE" value="javított" />
+    <MESSAGE value="+saved game" />
+    <option name="LAST_COMMIT_MESSAGE" value="+saved game" />
   </component>
 </project>
