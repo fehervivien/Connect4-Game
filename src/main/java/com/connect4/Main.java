@@ -17,6 +17,18 @@ Feladata:
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Szeretnél betölteni egy játékpályát egy fájlból? (Igen/Nem)");
+        String choice = scanner.nextLine();
+
+        PalyaOlvasasa game;
+        if (choice.equalsIgnoreCase("Igen")) {
+            System.out.print("Add meg a fájl elérési útját: ");
+            String filePath = scanner.nextLine();
+            game = new PalyaOlvasasa(filePath);
+        } else {
+            game = new PalyaOlvasasa(); // üres táblával indít
+        }
+
 
         /*Létrehozzuk a táblát 7 sorral és 6 oszloppal*/
         Tabla tabla = new Tabla(7, 6);
@@ -29,6 +41,7 @@ public class Main {
         //Az aktuális játékos
         Jatekos jelenlegiJatekos = jatekos1;
         HighScoreManager highScoreManager = new HighScoreManager();
+
 
         while (true) {
             //Kiírja a játékállást
@@ -45,7 +58,7 @@ public class Main {
                 oszlop = jelenlegiJatekos.lepes(tabla);
                 System.out.println("A gép " + oszlop + "-ba tett lépést.");
             }
-
+            game.saveBoard("Savedgame.txt");
             //Ellenőrizzük, hogy sikerült-e a lépés
             if (tabla.lehelyez(oszlop, jelenlegiJatekos.getJel())) {
                 //Ellenőrizzük, hogy nyert-e
@@ -67,8 +80,14 @@ public class Main {
             } else {
                 System.out.println("Az oszlop tele van, válassz másikat!");
             }
+
+
         }
+
+
+
         //Scanner lezárása
         scanner.close();
+
     }
 }

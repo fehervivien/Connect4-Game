@@ -14,6 +14,7 @@ import java.util.List;
 public class HighScoreManager {
     //A legmagasabb pontszámokat tároló lista
     private List<HighScore> highScores;
+    
     //A fájl neve, ahol a pontszámok tárolva vannak
     private static final String FILE_NAME = "highscores.txt";
 
