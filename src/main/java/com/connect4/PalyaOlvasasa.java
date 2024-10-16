@@ -1,5 +1,4 @@
 package com.connect4;
-
 import java.io.*;
 
 public class PalyaOlvasasa {
@@ -27,15 +26,21 @@ public class PalyaOlvasasa {
     }
 
     // Pálya betöltése
+    // Pálya betöltése
     public void loadBoard(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int row = 0;
             while ((line = br.readLine()) != null && row < rows) {
-                for (int j = 0; j < Math.min(columns, line.length()); j++) {
-                    board[row][j] = line.charAt(j);
+                line = line.trim(); // Tisztítsd meg a sort az üres helyektől
+                if (line.length() == columns) { // Ellenőrizd, hogy a sor hossza pontosan 7
+                    for (int j = 0; j < columns; j++) {
+                        board[row][j] = line.charAt(j);
+                    }
+                    row++;
+                } else {
+                    System.out.println("A sor nem megfelelő hosszúságú: " + line);
                 }
-                row++;
             }
         } catch (IOException e) {
             System.out.println("Hiba a fájl beolvasása közben: " + e.getMessage());
@@ -43,20 +48,35 @@ public class PalyaOlvasasa {
         }
     }
 
+
     // Pálya mentése
-    public void saveBoard(String filePath, int column, char character) {
+    // Pálya mentése
+    public void saveBoard(String filePath) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             for (int i = 0; i < rows; i++) {
+                StringBuilder line = new StringBuilder();
                 for (int j = 0; j < columns; j++) {
-                    // Minden játékos lépése elmentése
-                    bw.write(board[i][j]);
+                    line.append(board[i][j]);
                 }
+                bw.write(line.toString().trim()); // Írd ki a sort, eltávolítva az extra üres helyeket
                 bw.newLine();
             }
-            // Írja a legutolsó lépést (karakter és oszlop)
-            bw.write("Legutolsó lépés: " + character + " a " + column + " oszlopba.");
         } catch (IOException e) {
             System.out.println("Hiba a fájl írása közben: " + e.getMessage());
+        }
+    }
+
+
+    public char[][] getBoard() {
+        return board;
+    }
+
+    public void updateBoard(int column, char character) {
+        for (int i = rows - 1; i >= 0; i--) {
+            if (board[i][column] == ' ') {
+                board[i][column] = character;
+                break;
+            }
         }
     }
 }

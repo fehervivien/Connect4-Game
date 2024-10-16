@@ -27,6 +27,7 @@ public class Main {
             tabla.kiirTabla();
             System.out.println("Játékos " + jelenlegiJatekos.getJel() + ", válassz egy oszlopot (0-6): ");
             int oszlop;
+
             if (jelenlegiJatekos instanceof Ember) {
                 oszlop = scanner.nextInt();
             } else {
@@ -34,19 +35,19 @@ public class Main {
                 System.out.println("A gép " + oszlop + "-ba tett lépést.");
             }
 
+            // Frissítsük a játék állását
+            game.updateBoard(oszlop, jelenlegiJatekos.getJel());
+
             // Ellenőrizzük, hogy sikerült-e a lépés
             if (tabla.lehelyez(oszlop, jelenlegiJatekos.getJel())) {
-                // Pálya mentése
-                game.saveBoard("Savedgame.txt", oszlop, jelenlegiJatekos.getJel());
-
-                // Ellenőrizzük, hogy nyert-e
+                game.saveBoard("Savedgame.txt"); // mentés
                 if (tabla.ellenorizGyoz(jelenlegiJatekos.getJel())) {
                     tabla.kiirTabla();
                     System.out.println("Játékos " + jelenlegiJatekos.getJel() + " nyert!");
                     System.out.print("Add meg a neved a high score táblázathoz: ");
                     String nev = scanner.next();
-                    highScoreManager.mentesHighScore(nev, 1); // Minden győzelem 1 pontot ér
-                    highScoreManager.kiirHighScores(); // Kiírja a high score táblázatot
+                    highScoreManager.mentesHighScore(nev, 1);
+                    highScoreManager.kiirHighScores();
                     break;
                 }
                 jelenlegiJatekos = (jelenlegiJatekos == jatekos1) ? jatekos2 : jatekos1;
@@ -54,6 +55,7 @@ public class Main {
                 System.out.println("Az oszlop tele van, válassz másikat!");
             }
         }
+
         scanner.close();
     }
 }
