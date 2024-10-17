@@ -8,16 +8,20 @@ public class Main {
         System.out.println("Szeretnél betölteni egy játékpályát egy fájlból? (Igen/Nem)");
         String choice = scanner.nextLine();
 
-        PalyaOlvasasa game;
+        PalyaOlvasKiir game;
+        Tabla tabla;
         if (choice.equalsIgnoreCase("Igen")) {
             System.out.print("Add meg a fájl elérési útját: ");
             String filePath = scanner.nextLine();
-            game = new PalyaOlvasasa(filePath);
+            game = new PalyaOlvasKiir(filePath);
+            // Inicializáljuk a Tablat a beolvasott táblával
+             tabla = new Tabla(game.getBoard());
         } else {
-            game = new PalyaOlvasasa(); // üres táblával indít
+            game = new PalyaOlvasKiir(); // üres táblával indít
+             tabla = new Tabla(7, 6); // Üres tábla
         }
 
-        Tabla tabla = new Tabla(7, 6);
+
         Jatekos jatekos1 = new Ember('X');
         Jatekos jatekos2 = new Gep('O');
         Jatekos jelenlegiJatekos = jatekos1;
@@ -25,7 +29,7 @@ public class Main {
 
         while (true) {
             tabla.kiirTabla();
-            System.out.println("Játékos " + jelenlegiJatekos.getJel() + ", válassz egy oszlopot (0-6): ");
+            System.out.println("Játékos " + jelenlegiJatekos.getJel() + ", válassz egy oszlopot (0-5): ");
             int oszlop;
 
             if (jelenlegiJatekos instanceof Ember) {

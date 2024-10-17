@@ -29,8 +29,18 @@ public class Tabla {
         tabla = new char[sorok][oszlopok];
         for (int i = 0; i < sorok; i++) {
             for (int j = 0; j < oszlopok; j++) {
-                tabla[i][j] = ' ';
+                tabla[i][j] = ' ';  //üres hely
             }
+        }
+    }
+
+    // Új konstruktor, amely char[][]-t fogad
+    public Tabla(char[][] tabla) {
+        this.sorok = tabla.length;
+        this.oszlopok = tabla[0].length;
+        this.tabla = new char[sorok][oszlopok];
+        for (int i = 0; i < sorok; i++) {
+            System.arraycopy(tabla[i], 0, this.tabla[i], 0, oszlopok); // Másold át a beolvasott táblát
         }
     }
 
@@ -117,31 +127,6 @@ public class Tabla {
         return oszlopok;
     }
 
-    /* Betölti a tábla állapotát egy fájlból.
-    Minden sor karakterei beolvashatók egy soronkénti
-    BufferedReader segítségével.*/
-    public void betoltTabla(String fajlNev) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(fajlNev))) {
-            for (int i = 0; i < sorok; i++) {
-                String line = br.readLine();
-                for (int j = 0; j < oszlopok; j++) {
-                    tabla[i][j] = line.charAt(j);
-                }
-            }
-        }
-    }
 
-    /* Elmenti a tábla aktuális állapotát egy fájlba, karakterenként,
-    majd soronként.*/
-    public void mentTabla(String fajlNev) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fajlNev))) {
-            for (int i = 0; i < sorok; i++) {
-                for (int j = 0; j < oszlopok; j++) {
-                    bw.write(tabla[i][j]);
-                }
-                bw.newLine();
-            }
-        }
-    }
 
 }
