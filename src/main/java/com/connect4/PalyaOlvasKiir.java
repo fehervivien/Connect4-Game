@@ -1,5 +1,6 @@
 package com.connect4;
 import java.io.*;
+import java.util.Arrays;
 
 public class PalyaOlvasKiir {
 
@@ -27,12 +28,12 @@ public class PalyaOlvasKiir {
 
     // Pálya betöltése
     public void loadBoard(String filePath) {
+        initializeBoard(); // Reset the board to empty before loading
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int row = 0;
-            while ((line = br.readLine()) != null && row < rows) {
-                // Ellenőrzi, hogy a sor hossza pontosan 7,
-                // mert az oszlop száma = sor hossza
+            while ((line = br.readLine()) != null) {
+                // Ellenőrzi, hogy a sor hossza pontosan 6
                 if (line.length() == columns) {
                     for (int j = 0; j < columns; j++) {
                         board[row][j] = line.charAt(j);
@@ -41,13 +42,17 @@ public class PalyaOlvasKiir {
                 } else {
                     System.out.println("A sor nem megfelelő hosszúságú: " + line.length());
                     System.out.println("Betöltendő fájl útvonala: " + filePath);
+                    // Ha bármelyik sor érvénytelen, ne csinálj semmit
+                    return; // Stop loading further lines and exit
                 }
             }
         } catch (IOException e) {
             System.out.println("Hiba a fájl beolvasása közben: " + e.getMessage());
-            initializeBoard(); // ha hiba van, üres táblát indít
+            initializeBoard(); // if there is an error, start with an empty board
         }
     }
+
+
 
 
     public void saveBoard(String filePath) {
@@ -57,13 +62,20 @@ public class PalyaOlvasKiir {
                 for (int j = 0; j < columns; j++) {
                     line.append(board[i][j]);
                 }
+                // Debug kiírás a táblázat állapotáról
+                System.out.println("Mentett sor: " + line.toString());
                 bw.write(line.toString());
                 bw.newLine();
             }
         } catch (IOException e) {
             System.out.println("Hiba a fájl írása közben: " + e.getMessage());
+            throw new RuntimeException("Hiba történt a pálya mentésekor.", e);
         }
     }
+
+
+
+
 
 
 
@@ -71,12 +83,14 @@ public class PalyaOlvasKiir {
         return board;
     }
 
-    public void updateBoard(int column, char character) {
-        for (int i = rows - 1; i >= 0; i--) {
-            if (board[i][column] == ' ') {
-                board[i][column] = character;
-                break;
-            }
+    //Pálya állásának frissítése
+    public void updateBoard(int row, char symbol) {
+        if (row >= 0 && row < rows) {
+            // Az oszlopindexet is módosítsd, ha szükséges
+            board[row][0] = symbol; // Az első oszlopba írjuk
         }
     }
+
+
+
 }

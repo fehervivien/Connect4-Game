@@ -1,3 +1,4 @@
+import com.connect4.HighScore;
 import com.connect4.HighScoreManager;
 import org.junit.After;
 import org.junit.Before;
@@ -14,8 +15,14 @@ public class HighScoreManagerTest {
 
     @Before
     public void setUp() throws IOException {
-        // Létrehozzuk a teszt fájlt, hogy a HighScoreManager tesztelni tudja
+        // Létrehozzuk a teszt fájlt, és felülírjuk a tartalmát (újraindítjuk)
         File testFile = new File(testFileName);
+        if (testFile.exists()) {
+            testFile.delete(); // Töröljük a korábbi fájlt
+        }
+        testFile.createNewFile(); // Új, üres fájl létrehozása
+
+        // Írjunk néhány alapértelmezett adatot a teszthez
         BufferedWriter writer = new BufferedWriter(new FileWriter(testFile));
         writer.write("Alice: 100\n");
         writer.write("Bob: 50\n");
@@ -32,7 +39,7 @@ public class HighScoreManagerTest {
                         String[] parts = line.split(":");
                         String nev = parts[0];
                         int pontszam = Integer.parseInt(parts[1].trim());
-                        highScores.add(new HighScore(nev, pontszam));
+                        getHighScores().add(new HighScore(nev, pontszam));
                     }
                 } catch (IOException e) {
                     System.out.println("Hiba a high score fájl betöltésekor: " + e.getMessage());
@@ -40,6 +47,8 @@ public class HighScoreManagerTest {
             }
         };
     }
+
+
 
     @After
     public void tearDown() {
@@ -50,20 +59,27 @@ public class HighScoreManagerTest {
 
     @Test
     public void testBetoltHighScores() {
-        // Ellenőrizzük, hogy a fájl betöltése helyesen történt
-        assertEquals(3, highScoreManager.getHighScores().size());
-        assertEquals("Alice", highScoreManager.getHighScores().get(0).getNev());
-        assertEquals(100, highScoreManager.getHighScores().get(0).getPontszam());
+        assertEquals(3, highScoreManager.getHighScores().size()); // Ellenőrizzük, hogy három pontszámot betöltöttünk
+        assertEquals("Alice", highScoreManager.getHighScores().get(0).getNev()); // Ellenőrizzük, hogy az első név Alice
+        assertEquals(100, highScoreManager.getHighScores().get(0).getPontszam()); // Ellenőrizzük, hogy az első pontszám 100
     }
 
     @Test
     public void testMentesHighScore() {
         // Új pontszám mentése
         highScoreManager.mentesHighScore("Dave", 80);
+
         assertEquals(4, highScoreManager.getHighScores().size()); // Ellenőrizzük, hogy a méret 4
-        assertEquals("Dave", highScoreManager.getHighScores().get(0).getNev()); // Ellenőrizzük, hogy Dave az első
-        assertEquals(80, highScoreManager.getHighScores().get(0).getPontszam()); // Ellenőrizzük a pontszámot
+
+        // Ellenőrizzük, hogy az első Alice maradt
+        assertEquals("Alice", highScoreManager.getHighScores().get(0).getNev());
+        assertEquals(100, highScoreManager.getHighScores().get(0).getPontszam());
+
+        // Ellenőrizzük, hogy Dave lett a második helyen
+        assertEquals("Dave", highScoreManager.getHighScores().get(1).getNev());
+        assertEquals(80, highScoreManager.getHighScores().get(1).getPontszam());
     }
+
 
     @Test
     public void testKiirHighScores() {

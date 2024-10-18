@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        runGame(scanner);
+        scanner.close();
+    }
+
+    public static void runGame(Scanner scanner) {
         System.out.println("Szeretnél betölteni egy játékpályát egy fájlból? (Igen/Nem)");
         String choice = scanner.nextLine();
 
@@ -15,12 +20,11 @@ public class Main {
             String filePath = scanner.nextLine();
             game = new PalyaOlvasKiir(filePath);
             // Inicializáljuk a Tablat a beolvasott táblával
-             tabla = new Tabla(game.getBoard());
+            tabla = new Tabla(game.getBoard());
         } else {
             game = new PalyaOlvasKiir(); // üres táblával indít
-             tabla = new Tabla(7, 6); // Üres tábla
+            tabla = new Tabla(7, 6); // Üres tábla
         }
-
 
         Jatekos jatekos1 = new Ember('X');
         Jatekos jatekos2 = new Gep('O');
@@ -59,7 +63,5 @@ public class Main {
                 System.out.println("Az oszlop tele van, válassz másikat!");
             }
         }
-
-        scanner.close();
     }
 }

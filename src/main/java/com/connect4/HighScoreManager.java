@@ -39,10 +39,15 @@ public class HighScoreManager {
 
     public void mentesHighScore(String nev, int pontszam) {
         highScores.add(new HighScore(nev, pontszam));
-        Collections.sort(highScores, (a, b) -> b.getPontszam() - a.getPontszam()); // Csökkenő sorrend
-        while (highScores.size() > 10) { // Csak az első 10 legjobb
+        // Csökkenő sorrend: a pontszámok szerint rendezzük
+        Collections.sort(highScores, (a, b) -> Integer.compare(b.getPontszam(), a.getPontszam()));
+
+        // Csak az első 10 legjobb
+        while (highScores.size() > 10) {
             highScores.remove(highScores.size() - 1);
         }
+
+        // Fájlba mentés
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (HighScore hs : highScores) {
                 bw.write(hs.toString());
@@ -53,10 +58,18 @@ public class HighScoreManager {
         }
     }
 
+
     public void kiirHighScores() {
         System.out.println("High Scores:");
         for (HighScore hs : highScores) {
             System.out.println(hs);
         }
     }
+
+    // Getter a highScores listához
+    public List<HighScore> getHighScores() {
+        return highScores; // Ez elérhető a tesztosztályban
+    }
+
+
 }
