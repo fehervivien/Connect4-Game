@@ -3,3 +3,4 @@
 - jegyezze meg a felhasználót, azért hogy hozzáadja a győzelmeket a highscore-hoz (high score.txt)
 - színek: a sárga: ember, piros: gép, átlehetne írni az X-et és az O-t
 - a rungame() metodust kulon osztalyba rakni!
+- xml-be rakni a kiiratott palyat
